@@ -8,6 +8,6 @@ To build this project you need:
   5. MySQL
 
 To run:
-  Create database in MySQL
-  Open folder "02-backend" in IDEA adn run project
-  Open folder "01-frontend" in terminal and write "ng serve --open"
+Create database in MySQL
+Open folder "02-backend" in IDEA adn run project
+Open folder "01-frontend" in terminal and write "ng serve --open"
