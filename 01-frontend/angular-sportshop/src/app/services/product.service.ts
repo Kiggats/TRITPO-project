@@ -38,6 +38,12 @@ export class ProductService {
       map(response => response._embedded.products)
     );
   }
+
+  getProduct(productId: number): Observable<Product> {
+    const productUrl = 'http://localhost:8080/api/products/' + productId;
+
+    return  this.httpClient.get<Product>(productUrl);
+  }
 }
 
 interface GetResponseProducts {
