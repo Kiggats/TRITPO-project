@@ -4,6 +4,7 @@ import {SportShopFormService} from "../../services/sport-shop-form.service";
 import {Country} from "../../common/country";
 import {State} from "../../common/state";
 import {SportShopValidators} from "../../validators/sport-shop-validators";
+import {CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-checkout',
@@ -26,9 +27,13 @@ export class CheckoutComponent implements OnInit {
   billingAddressStates: State[] = [];
 
   constructor(private  formBuilder: FormBuilder,
-              private sportShopFormService: SportShopFormService) { }
+              private sportShopFormService: SportShopFormService,
+              private  cartService: CartService) { }
 
   ngOnInit(): void {
+
+    this.reviewCardDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [Validators.required, Validators.minLength(2), SportShopValidators.notOnlyWhitespace]),
@@ -157,11 +162,24 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
+  reviewCardDetails() {
+    this.cartService.totalQuantity.subscribe(
+      data => {
+        this.totalQuantity = data;
+      }
+    );
+
+    this.cartService.totalPrice.subscribe(
+      data => {
+        this.totalPrice = data;
+      }
+    );
+  }
+
   onSubmit() {
     if(this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
     }
   }
-
 
 }
