@@ -1,9 +1,6 @@
 package com.sportshop.config;
 
-import com.sportshop.entity.Country;
-import com.sportshop.entity.Product;
-import com.sportshop.entity.ProductCategory;
-import com.sportshop.entity.State;
+import com.sportshop.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -50,6 +47,9 @@ public class MyDataRestConfig  implements RepositoryRestConfigurer {
 
         // disable HTTP methods for State: PUT, POST, DELETE, PATCH
         disableHttpMetods(State.class, config, theUnsupportedActions);
+
+        // disable HTTP methods for Order: PUT, POST, DELETE, PATCH
+        disableHttpMetods(Order.class, config, theUnsupportedActions);
 
         exposeIds(config);
 
