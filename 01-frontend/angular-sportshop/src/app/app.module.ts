@@ -19,18 +19,19 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 import {OktaAuth} from "@okta/okta-auth-js";
 
 import {
-  OKTA_CONFIG,
+  OKTA_CONFIG, OktaAuthGuard,
   OktaAuthModule,
   OktaCallbackComponent
 } from '@okta/okta-angular';
 
 import MyAppConfig from './config/my-app-config';
+import { MembersPageComponent } from './components/members-page/members-page.component';
 
 
 
 const oktaConfig = Object.assign({
 
-  onAuthRequired: (injector: any) => {
+  onAuthRequired: (oktaAuth: any, injector: any) => {
     const router = injector.get(Router);
     router.navigate(['/login']);
   }
@@ -40,6 +41,7 @@ const oktaConfig = Object.assign({
 const oktaAuth = new OktaAuth(oktaConfig);
 
 const routes: Routes = [
+  {path: 'members', component: MembersPageComponent, canActivate: [OktaAuthGuard]},
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginComponent},
 
@@ -66,6 +68,7 @@ const routes: Routes = [
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
+    MembersPageComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
