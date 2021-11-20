@@ -10,7 +10,6 @@ import {Router} from "@angular/router";
 import {Order} from "../../common/order";
 import {OrderItem} from "../../common/order-item";
 import {Purchase} from "../../common/purchase";
-import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-checkout',
