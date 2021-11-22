@@ -4,14 +4,15 @@ import {HttpClient} from "@angular/common/http";
 import {Country} from "../common/country";
 import {map} from "rxjs/operators";
 import {State} from "../common/state";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SportShopFormService {
 
-  private countriesUrl = 'http://localhost:8080/api/countries';
-  private statesUrl = 'http://localhost:8080/api/states';
+  private countriesUrl = environment.sportShopApiUrl + '/countries';
+  private statesUrl = environment.sportShopApiUrl + '/states';
 
   constructor(private httpClient: HttpClient) { }
 
