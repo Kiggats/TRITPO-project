@@ -3,27 +3,28 @@
     <div class="container-fluid">
       <h3>Your Order History</h3>
       <div *ngIf="orderList.length > 0">
-        <table class="table table-bordered">
+        <table class="table table-striped">
+          <thead>
           <tr>
-            <th width="20%">Order Tracking Number</th>
-            <th width="20%">Total Price</th>
-            <th width="20%">Total Quantity</th>
-            <th width="20%">Date</th>
+            <th scope="col">#</th>
+            <th scope="col">Order Tracking Number</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Total Quantity</th>
+            <th scope="col">Date</th>
           </tr>
-          <tr *ngFor="let tempOrderHistory of orderList">
+          </thead>
+          <tbody>
+          <tr *ngFor="let tempOrder of orderList; index as i">
+            <th scope="row">{{ i + 1 }}</th>
             <td>
-              {{tempOrderHistory.orderTrackingNumber}}
+              {{ tempOrder.orderTrackingNumber }}
             </td>
-            <td>
-              {{tempOrderHistory.totalPrice | currency: 'USD'}}
-            </td>
-            <td>
-              {{tempOrderHistory.totalQuantity}}
-            </td>
-            <td>
-              {{tempOrderHistory.dateCreated | date: 'medium'}}
-            </td>
+            <td>{{ tempOrder.totalPrice | currency: 'USD' }}</td>
+            <td>{{ tempOrder.totalQuantity | number }}</td>
+            <td>{{ tempOrder.dateCreated | date: 'medium' }}</td>
+            <td></td>
           </tr>
+          </tbody>
         </table>
       </div>
 
@@ -34,3 +35,6 @@
     </div>
   </div>
 </div>
+
+
+
